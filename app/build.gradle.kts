@@ -50,9 +50,8 @@ dependencies {
     //Implementation Room
     val room_version = "2.5.1"
     implementation("androidx.room:room-runtime:$room_version")
-    kapt("androidx.room:room-compiler:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
-
 
     //Implementation View Model
     val lifecycle_version = "2.5.1"
@@ -69,7 +68,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version")
 
     // Annotation processor
-    kapt ("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
+    kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
 
     // optional - helpers for implementing LifecycleOwner in a Service
     implementation("androidx.lifecycle:lifecycle-service:$lifecycle_version")
@@ -81,13 +80,13 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version")
 
     // optional - Test helpers for LiveData
-    testImplementation ("androidx.arch.core:core-testing:$arch_version")
+    testImplementation("androidx.arch.core:core-testing:$arch_version")
 
     // optional - Test helpers for Lifecycle runtime
-    testImplementation ("androidx.lifecycle:lifecycle-runtime-testing:$lifecycle_version")
+    testImplementation("androidx.lifecycle:lifecycle-runtime-testing:$lifecycle_version")
 
     // optional - Test helpers
-    testImplementation ("androidx.room:room-testing:$room_version")
+    testImplementation("androidx.room:room-testing:$room_version")
 
     //Implementation Fragments
     val fragment_version = "1.5.6"
@@ -95,7 +94,7 @@ dependencies {
     // Kotlin
     implementation("androidx.fragment:fragment-ktx:$fragment_version")
     // Testing Fragments in Isolation
-    debugImplementation ("androidx.fragment:fragment-testing:$fragment_version")
+    debugImplementation("androidx.fragment:fragment-testing:$fragment_version")
 
     implementation("io.coil-kt:coil:2.3.0")
 
