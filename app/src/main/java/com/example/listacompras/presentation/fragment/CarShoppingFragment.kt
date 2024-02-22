@@ -27,7 +27,7 @@ class CarShoppingFragment : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance(param1: String, param2: String) = CarShoppingFragment().apply {
+        fun newInstance() = CarShoppingFragment().apply {
             arguments = Bundle().apply {
 
             }
