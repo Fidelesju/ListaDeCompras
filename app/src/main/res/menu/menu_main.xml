@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/products_list"
+        android:icon="@drawable/baseline_list_24"
+        android:title="Produtos"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/sales_list"
+        android:icon="@drawable/baseline_monetization_on_24"
+        android:title="Compras"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/car_list"
+        android:title="Carrinho"
+        android:icon="@drawable/baseline_shopping_cart_checkout_24"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/historic_list"
+        android:title="Historico"
+        android:icon="@drawable/baseline_auto_awesome_motion_24"
+        app:showAsAction="never"/>
+</menu>

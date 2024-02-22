@@ -4,37 +4,39 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.compose.runtime.Composable
 import com.example.listacompras.R
 import com.example.listacompras.data.Products
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class MainActivity : AppCompatActivity() {
+class ProductDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_product_detail)
 
-        val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
         val floatingActionButton = findViewById<FloatingActionButton>(R.id.floating_action_button)
 
         floatingActionButton.setOnClickListener {
-            openProductListDetail()
+            openMainActivity()
         }
 
     }
 
-
-    private fun openProductListDetail() {
-        val intent = ProductDetailActivity.start(this, null)
+    private fun openMainActivity() {
+        val intent = MainActivity.start(this)
         startActivity(intent)
     }
 
+
     companion object {
-        fun start(context: Context): Intent {
-            val intent = Intent(context, MainActivity::class.java)
+        private const val PRODUCT_DETAIL_EXTRA = "product.extra.detail"
+
+        fun start(context: Context, products: Products?): Intent {
+            val intent = Intent(context, ProductDetailActivity::class.java)
+                .apply {
+                    putExtra(PRODUCT_DETAIL_EXTRA, products)
+                }
             return intent
         }
     }
-
 }
