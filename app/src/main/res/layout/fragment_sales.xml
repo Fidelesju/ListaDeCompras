@@ -7,19 +7,40 @@
     tools:context=".presentation.fragment.SalesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_sales"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_sales_list"
-        android:layout_marginTop="12dp"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_action_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="14dp"
-        android:backgroundTint="@color/blue_500"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/baseline_keyboard_backspace_24" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        tools:listitem="@layout/item_sales_list" />
+
+    <LinearLayout
+        android:id="@+id/ctn_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:gravity="center"
+            android:text="Nenhum alimento selecionado" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="32dp"
+            android:src="@drawable/img_empty_cart" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
