@@ -4,7 +4,7 @@ import MainDispatcherRule
 import com.example.listacompras.data.ProductDao
 import com.example.listacompras.data.Products
 import com.example.listacompras.presentation.ActionType
-import com.example.listacompras.presentation.ProductsAction
+import com.example.listacompras.presentation.ProductAction
 import com.example.listacompras.presentation.viewModel.ProductDetailViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -37,7 +37,7 @@ class ProductDetailViewModelTest : TestWatcher() {
             "Description"
         )
 
-        val taskAction = ProductsAction(
+        val taskAction = ProductAction(
             products = taskInput,
             actionType = ActionType.UPDATE.name
         )
@@ -55,7 +55,7 @@ class ProductDetailViewModelTest : TestWatcher() {
             "Description"
         )
 
-        val taskAction = ProductsAction(
+        val taskAction = ProductAction(
             products = taskInput,
             actionType = ActionType.DELETE.name
         )
@@ -73,7 +73,7 @@ class ProductDetailViewModelTest : TestWatcher() {
             "Description"
         )
 
-        val taskAction = ProductsAction(
+        val taskAction = ProductAction(
             products = taskInput,
             actionType = ActionType.CREATE.name
         )

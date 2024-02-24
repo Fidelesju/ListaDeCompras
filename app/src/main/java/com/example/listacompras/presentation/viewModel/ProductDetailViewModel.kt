@@ -9,41 +9,42 @@ import com.example.listacompras.ListaComprasApplication
 import com.example.listacompras.data.ProductDao
 import com.example.listacompras.data.Products
 import com.example.listacompras.presentation.ActionType
-import com.example.listacompras.presentation.ProductsAction
+import com.example.listacompras.presentation.ProductAction
 import kotlinx.coroutines.launch
 
 class ProductDetailViewModel(
     private val productDao: ProductDao
 ) : ViewModel() {
 
+
     val productListLiveData: LiveData<List<Products>> = productDao.getAll()
 
-    fun execute(producAction: ProductsAction) {
-        when (producAction.actionType) {
-            ActionType.CREATE.name -> insertIntoDatabase(producAction.products!!)
-            ActionType.DELETE.name -> deleteIntoProducts(producAction.products!!)
-            ActionType.UPDATE.name -> updateIntoProducts(producAction.products!!)
+    fun execute(productAction: ProductAction) {
+        when (productAction.actionType) {
+            ActionType.CREATE.name -> insertIntoDatabase(productAction.products!!)
+            ActionType.DELETE.name -> deleteIntoTask(productAction.products!!)
+            ActionType.UPDATE.name -> updateIntoTask(productAction.products!!)
         }
     }
 
     //Inserindo uma tarefa no banco de dados
-    private fun insertIntoDatabase(product: Products) {
+    private fun insertIntoDatabase(products: Products) {
         viewModelScope.launch {
-            productDao.insert(product)
+            productDao.insert(products)
         }
     }
 
     //Alterando tarefas
-    private fun updateIntoProducts(product: Products) {
+    private fun updateIntoTask(products: Products) {
         viewModelScope.launch {
-            productDao.update(product)
+            productDao.update(products)
         }
     }
 
     //Deletando uma tarefa
-    private fun deleteIntoProducts(product: Products) {
+    private fun deleteIntoTask(products: Products) {
         viewModelScope.launch {
-            productDao.delete(product)
+            productDao.delete(products)
         }
     }
 

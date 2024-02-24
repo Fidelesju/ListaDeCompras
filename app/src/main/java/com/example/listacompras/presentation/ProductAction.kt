@@ -8,6 +8,6 @@ enum class ActionType {
     DELETE, UPDATE, CREATE
 }
 
-data class ProductsAction(
-    val products: Products?, val actionType: String
+data class ProductAction (
+    val products: Products?, val actionType : String
 ) : Serializable

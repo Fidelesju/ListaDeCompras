@@ -8,8 +8,8 @@ import com.example.listacompras.data.ProductDao
 import com.example.listacompras.data.Products
 
 class ProductListViewModel(
-    productDao: ProductDao
-) : ViewModel() {
+    private val productDao: ProductDao
+) : ViewModel(){
 
     val productListLiveData: LiveData<List<Products>> = productDao.getAll()
 
@@ -20,4 +20,5 @@ class ProductListViewModel(
             return ProductListViewModel(dao)
         }
     }
+
 }

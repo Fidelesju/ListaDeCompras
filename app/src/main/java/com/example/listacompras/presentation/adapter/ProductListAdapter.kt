@@ -22,7 +22,7 @@ class ProductListAdapter(
 
     override fun onBindViewHolder(holder: ProductListViewHolder, position: Int) {
         val products = getItem(position)
-        holder.bind(products)
+        holder.bind(products, openProductListDetail)
     }
 
     companion object : DiffUtil.ItemCallback<Products>() {
@@ -42,7 +42,8 @@ class ProductListViewHolder(private val view: View) : RecyclerView.ViewHolder(vi
     private val tvProducts = view.findViewById<TextView>(R.id.tv_product_title)
     private val tvCategory = view.findViewById<TextView>(R.id.tv_product_category)
     fun bind(
-        products: Products
+        products: Products,
+        openProductListDetail: (product: Products) -> Unit
     ) {
         tvProducts.text = products.title
         tvCategory.text = products.category

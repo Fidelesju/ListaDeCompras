@@ -1,5 +1,6 @@
 package com.example.listacompras.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
@@ -12,15 +13,15 @@ import androidx.room.Update
 interface ProductDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(product: Products)
+    fun insert(products: Products)
 
-    @Query("SELECT * FROM Products")
+    @Query("Select * from products")
     fun getAll(): LiveData<List<Products>>
 
     @Delete
-    suspend fun delete(product: Products)
+    fun delete(products: Products)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun update(product: Products)
+    fun update(products: Products)
 
 }

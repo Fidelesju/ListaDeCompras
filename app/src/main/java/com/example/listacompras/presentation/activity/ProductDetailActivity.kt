@@ -14,10 +14,8 @@ import androidx.activity.viewModels
 import com.example.listacompras.R
 import com.example.listacompras.data.Products
 import com.example.listacompras.presentation.ActionType
-import com.example.listacompras.presentation.ProductsAction
+import com.example.listacompras.presentation.ProductAction
 import com.example.listacompras.presentation.viewModel.ProductDetailViewModel
-import com.example.listacompras.presentation.viewModel.ProductListViewModel
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 
@@ -31,15 +29,14 @@ class ProductDetailActivity : AppCompatActivity() {
         )
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_detail)
 
         val floatingActionButton = findViewById<FloatingActionButton>(R.id.floating_action_button)
-        val btnApply : Button = findViewById(R.id.btn_apply)
-        val edtProduct : EditText = findViewById(R.id.edt_product)
-        val spnCategory : Spinner = findViewById(R.id.spn_category)
+        val btnApply: Button = findViewById(R.id.btn_apply)
+        val edtProduct: EditText = findViewById(R.id.edt_product)
+        val spnCategory: Spinner = findViewById(R.id.spn_category)
         val category = listOf("Frutas e Verduras", "Limpeza", "Mantimento", "Frios", "Carne")
 
         // Cria um adaptador e define os dados para o Spinner
@@ -48,6 +45,11 @@ class ProductDetailActivity : AppCompatActivity() {
         spnCategory.adapter = adaptador
 
         products = intent.getSerializableExtra(PRODUCT_DETAIL_EXTRA) as? Products
+
+        if (products != null) {
+            edtProduct.setText(products!!.title)
+//            spnCategory.setS(task!!.description)
+        }
 
         floatingActionButton.setOnClickListener {
             openMainActivity()
@@ -59,9 +61,9 @@ class ProductDetailActivity : AppCompatActivity() {
 
             if (title.isNotEmpty() && category.isNotEmpty()) {
                 if (products == null) {
-                    addOrUpdateProducts(0, title, category, ActionType.CREATE)
+                    addOrUpdateTask(0, title, category, ActionType.CREATE)
                 } else {
-                    addOrUpdateProducts(products!!.id, title, category, ActionType.UPDATE)
+                    addOrUpdateTask(products!!.id, title, category, ActionType.UPDATE)
                 }
             } else {
                 showMessage(it, "Fields are required")
@@ -70,13 +72,13 @@ class ProductDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun addOrUpdateProducts(
+    private fun addOrUpdateTask(
         id: Int,
-        product: String,
+        title: String,
         category: String,
         actionType: ActionType
     ) {
-        val products = Products(id, product, category)
+        val products = Products(id, title, category)
         performAction(products, actionType)
     }
 
@@ -104,9 +106,9 @@ class ProductDetailActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun performAction(product: Products, actionType: ActionType) {
+    private fun performAction(products: Products, actionType: ActionType) {
 
-        val productAction = ProductsAction(product, actionType.name)
+        val productAction = ProductAction(products, actionType.name)
         viewModel.execute(productAction)
         setResult(Activity.RESULT_OK, intent)
         finish()

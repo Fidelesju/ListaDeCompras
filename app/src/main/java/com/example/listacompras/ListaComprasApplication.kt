@@ -1,8 +1,8 @@
 package com.example.listacompras
+
 import android.app.Application
 import androidx.room.Room
 import com.example.listacompras.data.AppDataBase
-
 
 class ListaComprasApplication : Application() {
 
@@ -11,11 +11,12 @@ class ListaComprasApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         database = Room.databaseBuilder(
-            applicationContext, AppDataBase::class.java, "taskbeats-database"
-        ).build()
+            applicationContext, AppDataBase::class.java, "listacompras-database"
+        ).allowMainThreadQueries().build()
     }
 
-    fun getAppDatabase(): AppDataBase {
+    fun getAppDatabase( ): AppDataBase
+    {
         return database
     }
 }
