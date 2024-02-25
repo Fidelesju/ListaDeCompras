@@ -39,7 +39,6 @@ class ProductDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_detail)
-        setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         //region variables
@@ -144,33 +143,6 @@ class ProductDetailActivity : AppCompatActivity() {
         Snackbar.make(view, message, Snackbar.LENGTH_LONG).setAction("Action", null).show()
     }
 
-
-    //TODO Make menu
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        try {
-//            val inflater: MenuInflater = menuInflater
-//            inflater.inflate(R.menu.menu_detail_product, menu)
-//        } catch (ex: Exception) {
-//            ex.printStackTrace()
-//        }
-//        return true
-//    }
-
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when (item.itemId) {
-//            R.id.delete_product -> {
-//                if (products != null) {
-//                    performAction(products!!, ActionType.DELETE)
-//                } else {
-//                    Log.d("ERRO", "onOptionsItemSelected")
-//                }
-//                true
-//            }
-//
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
 
     private fun performAction(products: Products, actionType: ActionType) {
 
