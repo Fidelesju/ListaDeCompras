@@ -9,7 +9,7 @@ import com.example.listacompras.data.Products
 
 class ProductListViewModel(
     private val productDao: ProductDao
-) : ViewModel(){
+) : ViewModel() {
 
     val productListLiveData: LiveData<List<Products>> = productDao.getAll()
 

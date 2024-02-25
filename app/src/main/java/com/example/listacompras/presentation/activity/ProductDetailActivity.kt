@@ -1,11 +1,18 @@
 package com.example.listacompras.presentation.activity
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import android.view.View.OnCreateContextMenuListener
+import android.widget.Adapter
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -32,25 +39,28 @@ class ProductDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_detail)
+        setSupportActionBar(findViewById(R.id.toolbar))
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
+        //region variables
         val floatingActionButton = findViewById<FloatingActionButton>(R.id.floating_action_button)
         val btnApply: Button = findViewById(R.id.btn_apply)
+        val btnDelete: Button = findViewById(R.id.btn_delete)
         val edtProduct: EditText = findViewById(R.id.edt_product)
         val spnCategory: Spinner = findViewById(R.id.spn_category)
         val category = listOf("Frutas e Verduras", "Limpeza", "Mantimento", "Frios", "Carne")
 
-        // Cria um adaptador e define os dados para o Spinner
-        val adaptador = ArrayAdapter(this, android.R.layout.simple_spinner_item, category)
-        adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spnCategory.adapter = adaptador
+        //endregion
 
         products = intent.getSerializableExtra(PRODUCT_DETAIL_EXTRA) as? Products
 
-        if (products != null) {
-            edtProduct.setText(products!!.title)
-//            spnCategory.setS(task!!.description)
-        }
+        //region adapter spinner
+        val adaptador = ArrayAdapter(this, android.R.layout.simple_spinner_item, category)
+        adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spnCategory.adapter = adaptador
+        //endregion
 
+        //region events
         floatingActionButton.setOnClickListener {
             openMainActivity()
         }
@@ -70,13 +80,45 @@ class ProductDetailActivity : AppCompatActivity() {
                 println("Deu erro setOnClickListener")
             }
         }
+
+        btnDelete.setOnClickListener {
+            if (products != null) {
+                performAction(products!!, ActionType.DELETE)
+            } else {
+                showMessage(it, "Não há produtos para serem excluidos")
+                Log.d("ERRO", " btnDelete.setOnClickListener ")
+            }
+        }
+        setTextSetOnClickListener(products, edtProduct, spnCategory, adaptador)
+
+        //endregion
+    }
+
+    private fun showPopup(title: String, message: String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(title)
+        builder.setMessage(message)
+        builder.setPositiveButton("OK") { dialog, _ ->
+            dialog.dismiss()
+        }
+        builder.create().show()
+    }
+
+    private fun setTextSetOnClickListener(
+        products: Products?,
+        editText: EditText,
+        spinner: Spinner,
+        adapter: ArrayAdapter<String>
+    ) {
+        if (products != null) {
+            editText.setText(products!!.title)
+            val position = adapter.getPosition(products!!.category)
+            spinner.setSelection(position)
+        }
     }
 
     private fun addOrUpdateTask(
-        id: Int,
-        title: String,
-        category: String,
-        actionType: ActionType
+        id: Int, title: String, category: String, actionType: ActionType
     ) {
         val products = Products(id, title, category)
         performAction(products, actionType)
@@ -87,24 +129,48 @@ class ProductDetailActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-
     companion object {
         private const val PRODUCT_DETAIL_EXTRA = "product.extra.detail"
 
         fun start(context: Context, products: Products?): Intent {
-            val intent = Intent(context, ProductDetailActivity::class.java)
-                .apply {
-                    putExtra(PRODUCT_DETAIL_EXTRA, products)
-                }
+            val intent = Intent(context, ProductDetailActivity::class.java).apply {
+                putExtra(PRODUCT_DETAIL_EXTRA, products)
+            }
             return intent
         }
     }
 
     private fun showMessage(view: View, message: String) {
-        Snackbar.make(view, message, Snackbar.LENGTH_LONG)
-            .setAction("Action", null)
-            .show()
+        Snackbar.make(view, message, Snackbar.LENGTH_LONG).setAction("Action", null).show()
     }
+
+
+    //TODO Make menu
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        try {
+//            val inflater: MenuInflater = menuInflater
+//            inflater.inflate(R.menu.menu_detail_product, menu)
+//        } catch (ex: Exception) {
+//            ex.printStackTrace()
+//        }
+//        return true
+//    }
+
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return when (item.itemId) {
+//            R.id.delete_product -> {
+//                if (products != null) {
+//                    performAction(products!!, ActionType.DELETE)
+//                } else {
+//                    Log.d("ERRO", "onOptionsItemSelected")
+//                }
+//                true
+//            }
+//
+//            else -> super.onOptionsItemSelected(item)
+//        }
+//    }
 
     private fun performAction(products: Products, actionType: ActionType) {
 

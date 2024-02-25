@@ -1,16 +1,17 @@
 package com.example.listacompras.presentation.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listacompras.R
-import com.example.listacompras.data.ProductDao
 import com.example.listacompras.data.Products
 import com.example.listacompras.presentation.activity.ProductDetailActivity
 import com.example.listacompras.presentation.adapter.ProductListAdapter
@@ -19,7 +20,7 @@ import com.example.listacompras.presentation.viewModel.ProductListViewModel
 class ProductsListFragment : Fragment() {
 
     private lateinit var ctnContent: LinearLayout
-
+    private lateinit var edtSearch: EditText
     private val adapter: ProductListAdapter by lazy {
         ProductListAdapter(::openProductListDetail)
     }
@@ -36,20 +37,40 @@ class ProductsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ctnContent = view.findViewById(R.id.ctn_content)
+        edtSearch = view.findViewById(R.id.edt_search)
         val rvTaskList: RecyclerView = view.findViewById(R.id.rv_product_list)
-        listFromDatabase()
-        rvTaskList.adapter = adapter
+        val search = edtSearch.text.toString()
 
+        listFromDatabase()
+        setupRecyclerView(rvTaskList)
+    }
+
+    override fun onStart() {
+        super.onStart()
+    }
+
+
+    private fun setupRecyclerView(recyclerView: RecyclerView) {
+        recyclerView.adapter = adapter
     }
 
     private fun listFromDatabase() {
 
-        val test = Observer<List<Products>> {
-            Log.d("Observer", "onChanged called with data: $it")
+        val listObserver = Observer<List<Products>> {
+            if (it.isEmpty()) {
+                ctnContent.visibility = View.VISIBLE
+                edtSearch.visibility = View.GONE
+            } else {
+                ctnContent.visibility = View.GONE
+                edtSearch.visibility = View.VISIBLE
+            }
             adapter.submitList(it)
         }
-        viewModel.productListLiveData.observe(viewLifecycleOwner, test)
+
+        //LiveData
+        viewModel.productListLiveData.observe(viewLifecycleOwner, listObserver)
     }
+
 
     private fun openProductListDetail(products: Products) {
         val intent = ProductDetailActivity.start(requireContext(), products)
