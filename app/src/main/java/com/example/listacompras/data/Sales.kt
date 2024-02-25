@@ -1,5 +1,14 @@
 package com.example.listacompras.data
 
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
+
+@Entity
 data class Sales(
-    val title : String
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+    val title: String,
+    val count: Int,
+    val value: String
 )

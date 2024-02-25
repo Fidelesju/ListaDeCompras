@@ -6,13 +6,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.compose.runtime.Composable
 import androidx.fragment.app.commit
+import androidx.room.Room
 import com.example.listacompras.R
+import com.example.listacompras.data.AppDataBase
 import com.example.listacompras.data.Products
 import com.example.listacompras.presentation.fragment.CarShoppingFragment
 import com.example.listacompras.presentation.fragment.ProductsListFragment
 import com.example.listacompras.presentation.fragment.SalesFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,5 +66,4 @@ class MainActivity : AppCompatActivity() {
             return intent
         }
     }
-
 }

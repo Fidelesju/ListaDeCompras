@@ -16,6 +16,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
@@ -47,14 +48,8 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    //Implementation Room
-    val room_version = "2.5.1"
-    implementation("androidx.room:room-runtime:$room_version")
-    kapt("androidx.room:room-compiler:$room_version")
-    implementation("androidx.room:room-ktx:$room_version")
 
-
-    //Implementation View Model
+    //Implementation (View Model
     val lifecycle_version = "2.5.1"
     val arch_version = "2.1.0"
 
@@ -69,7 +64,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version")
 
     // Annotation processor
-    kapt ("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
+    kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
 
     // optional - helpers for implementing LifecycleOwner in a Service
     implementation("androidx.lifecycle:lifecycle-service:$lifecycle_version")
@@ -81,13 +76,11 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version")
 
     // optional - Test helpers for LiveData
-    testImplementation ("androidx.arch.core:core-testing:$arch_version")
+    testImplementation("androidx.arch.core:core-testing:$arch_version")
 
     // optional - Test helpers for Lifecycle runtime
-    testImplementation ("androidx.lifecycle:lifecycle-runtime-testing:$lifecycle_version")
+    testImplementation("androidx.lifecycle:lifecycle-runtime-testing:$lifecycle_version")
 
-    // optional - Test helpers
-    testImplementation ("androidx.room:room-testing:$room_version")
 
     //Implementation Fragments
     val fragment_version = "1.5.6"
@@ -95,7 +88,7 @@ dependencies {
     // Kotlin
     implementation("androidx.fragment:fragment-ktx:$fragment_version")
     // Testing Fragments in Isolation
-    debugImplementation ("androidx.fragment:fragment-testing:$fragment_version")
+    debugImplementation("androidx.fragment:fragment-testing:$fragment_version")
 
     implementation("io.coil-kt:coil:2.3.0")
 
@@ -108,9 +101,23 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:$okHttpVersion")
     implementation("com.google.code.gson:gson:2.10.1")
 
-    //Implementation Testes
+    //Implementation (Testes
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
     testImplementation("org.mockito:mockito-core:4.5.1")
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
+
+    val room_version = "2.4.1"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+
+    // To use Kotlin annotation processing tool (kapt)
+    kapt("androidx.room:room-compiler:$room_version")
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$room_version")
+
+    // optional - Test helpers
+    testImplementation("androidx.room:room-testing:$room_version")
 
 }

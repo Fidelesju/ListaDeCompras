@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".presentation.activity.MainActivity">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,6 +31,7 @@
 
             <EditText
                 android:id="@+id/edt_product"
+                android:inputType="textCapSentences"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -54,12 +56,32 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
-        <Button
-            style="@style/buttonPrimary"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Cadastrar" />
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_delete"
+                style="@style/buttonPrimary"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                android:text="Deletar" />
+
+            <Button
+                android:id="@+id/btn_apply"
+                style="@style/buttonPrimary"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="Cadastrar" />
+
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
