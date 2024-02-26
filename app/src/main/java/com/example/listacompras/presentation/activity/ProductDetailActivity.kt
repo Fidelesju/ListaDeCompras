@@ -1,27 +1,21 @@
 package com.example.listacompras.presentation.activity
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
-import android.view.View.OnCreateContextMenuListener
-import android.widget.Adapter
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.example.listacompras.R
-import com.example.listacompras.data.Products
-import com.example.listacompras.presentation.ActionType
-import com.example.listacompras.presentation.ProductAction
+import com.example.listacompras.data.entity.Products
+import com.example.listacompras.presentation.action.ActionType
+import com.example.listacompras.presentation.action.ProductAction
 import com.example.listacompras.presentation.viewModel.ProductDetailViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -47,7 +41,7 @@ class ProductDetailActivity : AppCompatActivity() {
         val btnDelete: Button = findViewById(R.id.btn_delete)
         val edtProduct: EditText = findViewById(R.id.edt_product)
         val spnCategory: Spinner = findViewById(R.id.spn_category)
-        val category = listOf("Frutas e Verduras", "Limpeza", "Mantimento", "Frios", "Carne")
+        val category = listOf("Bebidas","Carnes","Cereais e Lanches","Condimentos e Temperos","Cuidados Pessoais","Frutas e Verduras", "Laticínios","Limpeza", "Padaria","Mantimento")
 
         //endregion
 
@@ -75,7 +69,7 @@ class ProductDetailActivity : AppCompatActivity() {
                     addOrUpdateTask(products!!.id, title, category, ActionType.UPDATE)
                 }
             } else {
-                showMessage(it, "Fields are required")
+                showMessage(it, "Preencha os campos")
                 println("Deu erro setOnClickListener")
             }
         }
@@ -91,16 +85,6 @@ class ProductDetailActivity : AppCompatActivity() {
         setTextSetOnClickListener(products, edtProduct, spnCategory, adaptador)
 
         //endregion
-    }
-
-    private fun showPopup(title: String, message: String) {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle(title)
-        builder.setMessage(message)
-        builder.setPositiveButton("OK") { dialog, _ ->
-            dialog.dismiss()
-        }
-        builder.create().show()
     }
 
     private fun setTextSetOnClickListener(
@@ -145,7 +129,6 @@ class ProductDetailActivity : AppCompatActivity() {
 
 
     private fun performAction(products: Products, actionType: ActionType) {
-
         val productAction = ProductAction(products, actionType.name)
         viewModel.execute(productAction)
         setResult(Activity.RESULT_OK, intent)

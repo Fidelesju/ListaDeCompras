@@ -10,17 +10,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.listacompras.R
 import com.example.listacompras.data.entity.Sales
 
-class SalesAdapter(
+class CartListAdapter(
     private val openSalesListDetail: (sales: Sales) -> Unit,
-) : ListAdapter<Sales, SalesViewHolder>(SalesAdapter) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SalesViewHolder {
+) : ListAdapter<Sales, CartListViewHolder>(SalesAdapter) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartListViewHolder {
         val view: View = LayoutInflater
             .from(parent.context)
-            .inflate(R.layout.item_sales_list, parent, false)
-        return SalesViewHolder(view)
+            .inflate(R.layout.item_cart_list, parent, false)
+        return CartListViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: SalesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CartListViewHolder, position: Int) {
         val sales = getItem(position)
         holder.bind(sales, openSalesListDetail)
     }
@@ -38,10 +38,11 @@ class SalesAdapter(
     }
 }
 
-class SalesViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+class CartListViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
-    private val tvTitleSales = view.findViewById<TextView>(R.id.tv_product_title_sales)
-    private val tvCountSales = view.findViewById<TextView>(R.id.tv_product_count_sales)
+    private val tvTitleSalesCart = view.findViewById<TextView>(R.id.tv_product_title_car)
+    private val tvTotalSales = view.findViewById<TextView>(R.id.tv_total_sales)
+
 
     fun bind(
         sales: Sales,
@@ -49,12 +50,21 @@ class SalesViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
     ) {
         val context = itemView.context
 
-        tvTitleSales.text = sales.title
-        tvCountSales.text = sales.count
+        val totalProduct = calculatingPrice(sales.count, sales.value)
+
+        tvTitleSalesCart.text = sales.title
+        tvTotalSales.text = totalProduct.toString()
 
         view.setOnClickListener {
             openSalesListDetail.invoke(sales)
         }
     }
 
+    fun calculatingPrice(count: String, value: String): Float {
+        val countInt = count.toInt()
+        val valueInt = value.toFloat()
+        val total = countInt * valueInt
+
+        return total
+    }
 }

@@ -4,20 +4,13 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.compose.runtime.Composable
 import androidx.fragment.app.commit
-import androidx.room.Room
 import com.example.listacompras.R
-import com.example.listacompras.data.AppDataBase
-import com.example.listacompras.data.Products
-import com.example.listacompras.presentation.fragment.CarShoppingFragment
+import com.example.listacompras.presentation.fragment.CartFragment
 import com.example.listacompras.presentation.fragment.ProductsListFragment
-import com.example.listacompras.presentation.fragment.SalesFragment
+import com.example.listacompras.presentation.fragment.SalesListFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,8 +18,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val productsListFragment = ProductsListFragment.newInstance()
-        val salesListFragment = SalesFragment.newInstance()
-        val carShoppingFragment = CarShoppingFragment.newInstance()
+        val salesListFragment = SalesListFragment.newInstance()
+        val cartFragment = CartFragment.newInstance()
         val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
         val floatingActionButton = findViewById<FloatingActionButton>(R.id.floating_action_button)
 
@@ -43,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             val fragment = when (it.itemId) {
                 R.id.products_list -> productsListFragment
                 R.id.sales_list -> salesListFragment
-                R.id.car_list -> carShoppingFragment
+                R.id.car_list -> cartFragment
                 else -> productsListFragment
             }
             supportFragmentManager.commit {
