@@ -9,7 +9,7 @@ import androidx.room.Update
 import com.example.listacompras.data.entity.Sales
 
 @Dao
-interface SalesDao {
+interface HistoricSalesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(sales: Sales)
@@ -22,7 +22,4 @@ interface SalesDao {
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(sales: Sales)
-
-    @Query ("Delete from sales")
-    fun deleteAll()
 }

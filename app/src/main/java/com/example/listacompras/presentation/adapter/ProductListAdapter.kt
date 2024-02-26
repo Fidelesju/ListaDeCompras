@@ -23,11 +23,13 @@ import com.example.listacompras.presentation.action.ActionType
 import com.example.listacompras.presentation.action.SalesAction
 import com.example.listacompras.presentation.viewModel.SalesDetailViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.util.Date
 
 class ProductListAdapter(
     private val openProductListDetail: (product: Products) -> Unit
 ) : ListAdapter<Products, ProductListViewHolder>(ProductListAdapter) {
+
+    private val sections = mutableMapOf<String, Int>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListViewHolder {
         val view: View = LayoutInflater
             .from(parent.context)
@@ -38,6 +40,24 @@ class ProductListAdapter(
     override fun onBindViewHolder(holder: ProductListViewHolder, position: Int) {
         val products = getItem(position)
         holder.bind(products, openProductListDetail)
+        // Se for um título de categoria, defina o texto correspondente
+        sections[products.category]?.let {
+            holder.bindSection(products.category)
+        }
+    }
+
+    // Retorna o tipo de visualização com base na posição
+    override fun getItemViewType(position: Int): Int {
+        val products = getItem(position)
+
+        // Se já existir um título para esta categoria, use o layout do item normal
+        sections[products.category]?.let {
+            return R.layout.item_product_list
+        }
+
+        // Caso contrário, adicione esta categoria como uma nova seção
+        sections[products.category] = position
+        return R.layout.item_product_list_with_category
     }
 
     companion object : DiffUtil.ItemCallback<Products>() {
@@ -58,6 +78,8 @@ class ProductListViewHolder(private val view: View) : RecyclerView.ViewHolder(vi
     private val tvCategory = view.findViewById<TextView>(R.id.tv_product_category)
     private val fab: FloatingActionButton = view.findViewById(R.id.floating_action_button_product)
     private val ctnProducts: CardView = view.findViewById(R.id.ctn_products)
+    private val tvCategoryTitle = view.findViewById<TextView>(R.id.tv_category_title)
+
 
     // Cor padrão ou cor original do FloatingActionButton
     val unpressed = ctnProducts.backgroundTintList
@@ -87,6 +109,11 @@ class ProductListViewHolder(private val view: View) : RecyclerView.ViewHolder(vi
         view.setOnClickListener {
             openProductListDetail.invoke(products)
         }
+    }
+
+    fun bindSection(category: String) {
+        // Configurar o título da categoria
+        tvCategoryTitle.text = category
     }
 
     // Função para mostrar o popup de quantidade
