@@ -1,12 +1,14 @@
 package com.example.listacompras.presentation.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.LinearLayout
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listacompras.R
@@ -36,11 +38,25 @@ class ProductsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         ctnContent = view.findViewById(R.id.ctn_content)
         edtSearch = view.findViewById(R.id.edt_search)
+
         val rvProductList: RecyclerView = view.findViewById(R.id.rv_product_list)
-        val search = edtSearch.text.toString()
 
         listFromDatabase()
         setupRecyclerView(rvProductList)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        edtSearch.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                // Atualiza o LiveData de texto de pesquisa no ViewModel
+//                viewModel.searchTextLiveData.value = s.toString()
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {

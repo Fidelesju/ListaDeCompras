@@ -5,7 +5,7 @@ import java.io.Serializable
 
 //CRUD
 enum class ActionType {
-    DELETE, UPDATE, CREATE
+    DELETE, UPDATE, CREATE, DELETE_ALL
 }
 
 data class ProductAction (

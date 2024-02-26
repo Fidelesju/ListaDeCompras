@@ -22,7 +22,7 @@ class SalesDetailViewModel(
     fun execute(salesAction: SalesAction) {
         when (salesAction.actionType) {
             ActionType.CREATE.name -> insertIntoDatabase(salesAction.sales!!)
-//            ActionType.DELETE.name -> deleteIntoTask(salesAction.sales!!)
+//            ActionType.DELETE.name -> deleteIntoTask()
             ActionType.UPDATE.name -> updateIntoTask(salesAction.sales!!)
         }
     }
@@ -41,12 +41,7 @@ class SalesDetailViewModel(
         }
     }
 
-//    //Deletando uma tarefa
-//    private fun deleteIntoTask(sales: Sales) {
-//        viewModelScope.launch {
-//            salesDao.delete(sales)
-//        }
-//    }
+
 
     companion object {
         fun getVMFactory(application: Application): ViewModelProvider.Factory {

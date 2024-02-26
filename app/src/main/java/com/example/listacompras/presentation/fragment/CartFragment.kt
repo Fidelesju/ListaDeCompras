@@ -1,15 +1,19 @@
 package com.example.listacompras.presentation.fragment
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listacompras.R
 import com.example.listacompras.data.entity.Sales
+import com.example.listacompras.presentation.action.ActionType
+import com.example.listacompras.presentation.action.SalesAction
 import com.example.listacompras.presentation.activity.SalesDetailActivity
 import com.example.listacompras.presentation.adapter.CartListAdapter
 import com.example.listacompras.presentation.viewModel.SalesListViewModel
@@ -19,6 +23,7 @@ import java.util.Date
 class CartFragment : Fragment() {
 
     private lateinit var tvTotal: TextView
+
     private val adapter: CartListAdapter by lazy {
         CartListAdapter(::openSalesListDetail)
     }
@@ -46,10 +51,25 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val rvCartList: RecyclerView = view.findViewById(R.id.rv_cart)
+        val btnFinishCart: Button = view.findViewById(R.id.btn_finish_cart)
+
         tvTotal = view.findViewById<TextView>(R.id.tv_total)
+
+        btnFinishCart.setOnClickListener {
+            deleteSales( ActionType.DELETE_ALL)
+        }
 
         listFromDatabase()
         setupRecyclerView(rvCartList)
+    }
+
+
+    private fun deleteSales(
+        actionType: ActionType
+    ) {
+        val salesAction = SalesAction(null, actionType.name)
+        viewModel.execute(salesAction)
+
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {

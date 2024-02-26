@@ -118,9 +118,9 @@ class SalesDetailActivity : AppCompatActivity() {
 
     }
 
-    private fun performAction(sales: Sales, actionType: ActionType) {
+    private fun performAction(sales: Sales?, actionType: ActionType) {
 
-        val salesAction = SalesAction(sales, actionType.name)
+        val salesAction = SalesAction(sales!!, actionType.name)
         viewModel.execute(salesAction)
         setResult(Activity.RESULT_OK, intent)
         finish()
