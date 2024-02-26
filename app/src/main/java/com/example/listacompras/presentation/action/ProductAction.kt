@@ -1,6 +1,6 @@
-package com.example.listacompras.presentation
+package com.example.listacompras.presentation.action
 
-import com.example.listacompras.data.Products
+import com.example.listacompras.data.entity.Products
 import java.io.Serializable
 
 //CRUD

@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.listacompras.ListaComprasApplication
-import com.example.listacompras.data.ProductDao
-import com.example.listacompras.data.Products
+import com.example.listacompras.data.dao.ProductDao
+import com.example.listacompras.data.entity.Products
 
 class ProductListViewModel(
     private val productDao: ProductDao

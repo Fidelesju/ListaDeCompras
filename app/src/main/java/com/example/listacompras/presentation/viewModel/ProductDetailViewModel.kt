@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.listacompras.ListaComprasApplication
-import com.example.listacompras.data.ProductDao
-import com.example.listacompras.data.Products
-import com.example.listacompras.presentation.ActionType
-import com.example.listacompras.presentation.ProductAction
+import com.example.listacompras.data.dao.ProductDao
+import com.example.listacompras.data.entity.Products
+import com.example.listacompras.presentation.action.ActionType
+import com.example.listacompras.presentation.action.ProductAction
 import kotlinx.coroutines.launch
 
 class ProductDetailViewModel(

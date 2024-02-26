@@ -1,10 +1,10 @@
 package com.example.listacompras
 
 import MainDispatcherRule
-import com.example.listacompras.data.ProductDao
-import com.example.listacompras.data.Products
-import com.example.listacompras.presentation.ActionType
-import com.example.listacompras.presentation.ProductAction
+import com.example.listacompras.data.dao.ProductDao
+import com.example.listacompras.data.entity.Products
+import com.example.listacompras.presentation.action.ActionType
+import com.example.listacompras.presentation.action.ProductAction
 import com.example.listacompras.presentation.viewModel.ProductDetailViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest

@@ -1,14 +1,13 @@
-package com.example.listacompras.data
+package com.example.listacompras.data.entity
 
 import androidx.room.Entity
-import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity
-data class Sales(
+data class Products(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val title: String,
-    val count: Int,
-    val value: String
-)
+    val category: String
+) : Serializable

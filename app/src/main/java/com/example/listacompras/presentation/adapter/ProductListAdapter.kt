@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
@@ -12,12 +11,19 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listacompras.R
-import com.example.listacompras.data.Products
+import com.example.listacompras.data.entity.Products
+import com.example.listacompras.data.entity.Sales
+import com.example.listacompras.presentation.action.ActionType
+import com.example.listacompras.presentation.action.SalesAction
+import com.example.listacompras.presentation.viewModel.SalesDetailViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.Date
 
 class ProductListAdapter(
     private val openProductListDetail: (product: Products) -> Unit
@@ -71,10 +77,8 @@ class ProductListViewHolder(private val view: View) : RecyclerView.ViewHolder(vi
                 ctnProducts.backgroundTintList = ColorStateList.valueOf(unpressed)
             } else {
                 ctnProducts.backgroundTintList = ColorStateList.valueOf(pressed)
+                showPopupCount(products, context)
             }
-            // Adicionando a chamada para mostrar o diálogo de quantidade
-            mostrarPopupQuantidade(products, context)
-
         }
 
         tvProducts.text = products.title
@@ -86,7 +90,7 @@ class ProductListViewHolder(private val view: View) : RecyclerView.ViewHolder(vi
     }
 
     // Função para mostrar o popup de quantidade
-    private fun mostrarPopupQuantidade(products: Products, context: Context) {
+    private fun showPopupCount(products: Products, context: Context) {
         val builder = AlertDialog.Builder(context)
         val inflater = LayoutInflater.from(context)
         val dialogView = inflater.inflate(R.layout.dialog_count, null)
@@ -95,9 +99,24 @@ class ProductListViewHolder(private val view: View) : RecyclerView.ViewHolder(vi
         builder.setView(dialogView)
             .setTitle("Digite a quantidade para ${products.title}")
             .setPositiveButton("OK") { dialog, _ ->
-                val quantidade = editTextQuantidade.text.toString().toIntOrNull() ?: 0
-                // Agora você pode usar a quantidade conforme necessário
-                Toast.makeText(context, "Quantidade: $quantidade", Toast.LENGTH_SHORT).show()
+                val count = editTextQuantidade.text.toString()
+                val value = 0
+                if (count.isNotEmpty()) {
+                    // Criar um novo Sales e inserir no banco de dados
+                    val newSales = Sales(0, products.title, count, value.toString(), "", "",1)
+                    val salesViewModel = ViewModelProvider(
+                        context as FragmentActivity,
+                        SalesDetailViewModel.getVMFactory(context.application)
+                    )
+                        .get(SalesDetailViewModel::class.java)
+                    salesViewModel.execute(SalesAction(newSales, ActionType.CREATE.name))
+                } else {
+                    Toast.makeText(
+                        context,
+                        "Quantidade deve ser maior que zero",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
                 dialog.dismiss()
             }
             .setNegativeButton("Cancelar") { dialog, _ ->

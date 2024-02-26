@@ -3,8 +3,6 @@ package com.example.listacompras.presentation.fragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
@@ -12,7 +10,7 @@ import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listacompras.R
-import com.example.listacompras.data.Products
+import com.example.listacompras.data.entity.Products
 import com.example.listacompras.presentation.activity.ProductDetailActivity
 import com.example.listacompras.presentation.adapter.ProductListAdapter
 import com.example.listacompras.presentation.viewModel.ProductListViewModel
@@ -38,17 +36,12 @@ class ProductsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         ctnContent = view.findViewById(R.id.ctn_content)
         edtSearch = view.findViewById(R.id.edt_search)
-        val rvTaskList: RecyclerView = view.findViewById(R.id.rv_product_list)
+        val rvProductList: RecyclerView = view.findViewById(R.id.rv_product_list)
         val search = edtSearch.text.toString()
 
         listFromDatabase()
-        setupRecyclerView(rvTaskList)
+        setupRecyclerView(rvProductList)
     }
-
-    override fun onStart() {
-        super.onStart()
-    }
-
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
         recyclerView.adapter = adapter
