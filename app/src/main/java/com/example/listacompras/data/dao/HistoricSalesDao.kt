@@ -5,21 +5,18 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
-import com.example.listacompras.data.entity.Sales
+import com.example.listacompras.data.entity.HistoricSales
 
 @Dao
 interface HistoricSalesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(sales: Sales)
+    fun insert(historicSales: HistoricSales)
 
-    @Query("Select * from sales where isActive = 1")
-    fun getSalesActive(): LiveData<List<Sales>>
+    @Query("SELECT DISTINCT datesales, MAX(id) as id, title, count, observation, count, datesales, totalSales, superMarketing, value FROM historicsales GROUP BY datesales, superMarketing ORDER BY datesales DESC")
+    fun getAllHistoricSales(): LiveData<List<HistoricSales>>
 
-    @Query("SELECT * FROM sales WHERE dateSales >= :todayStart")
-    fun getSalesByDate(todayStart: String): LiveData<List<Sales>>
+    @Query("SELECT * FROM historicsales WHERE datesales = :date AND superMarketing = :supermarket ORDER BY datesales DESC")
+    fun getAllHistoricByDateAndSupermarket(date: String, supermarket: String): LiveData<List<HistoricSales>>
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun update(sales: Sales)
 }

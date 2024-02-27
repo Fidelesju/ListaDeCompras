@@ -17,8 +17,8 @@ interface SalesDao {
     @Query("Select * from sales where isActive = 1")
     fun getSalesActive(): LiveData<List<Sales>>
 
-    @Query("SELECT * FROM sales WHERE dateSales >= :todayStart")
-    fun getSalesByDate(todayStart: String): LiveData<List<Sales>>
+    @Query("SELECT * FROM sales WHERE dateSales = :today")
+    fun getSalesByDate(today: String): List<Sales>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(sales: Sales)

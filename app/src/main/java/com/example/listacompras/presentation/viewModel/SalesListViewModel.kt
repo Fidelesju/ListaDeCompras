@@ -17,7 +17,7 @@ class SalesListViewModel(
 ) : ViewModel() {
 
     val salesListLiveData: LiveData<List<Sales>> = salesDao.getSalesActive()
-    var salesByDateLiveData: LiveData<List<Sales>> = MutableLiveData()
+    var salesByDateLiveData: MutableLiveData<List<Sales>> = MutableLiveData()
 
     fun execute(salesAction: SalesAction) {
         when (salesAction.actionType) {
@@ -26,8 +26,15 @@ class SalesListViewModel(
     }
 
     fun getSalesByDate(todayStart: String) {
-        salesByDateLiveData = salesDao.getSalesByDate(todayStart)
+        viewModelScope.launch {
+            // Obtenha a lista de vendas por data do DAO
+            val salesList = salesDao.getSalesByDate(todayStart)
+
+            // Atualize o valor do MutableLiveData com a nova lista
+            salesByDateLiveData.postValue(salesList)
+        }
     }
+
 
     //Deletando uma tarefa
     private fun deleteIntoTask() {

@@ -13,5 +13,6 @@ data class HistoricSales(
     val observation: String,
     val value: String,
     val dateSales: String,
-    val totalSales: String
+    val totalSales: String,
+    val superMarketing : String
 ) : Serializable
