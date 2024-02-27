@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.fragment.app.commit
 import com.example.listacompras.R
 import com.example.listacompras.presentation.fragment.CartFragment
+import com.example.listacompras.presentation.fragment.HistoricSalesFragment
 import com.example.listacompras.presentation.fragment.ProductsListFragment
 import com.example.listacompras.presentation.fragment.SalesListFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -19,7 +20,8 @@ class MainActivity : AppCompatActivity() {
 
         val productsListFragment = ProductsListFragment.newInstance()
         val salesListFragment = SalesListFragment.newInstance()
-        val cartFragment = CartFragment.newInstance()
+        val cartListFragment = CartFragment.newInstance()
+        val historicListFragment = HistoricSalesFragment.newInstance()
         val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
         val floatingActionButton = findViewById<FloatingActionButton>(R.id.floating_action_button)
 
@@ -36,7 +38,8 @@ class MainActivity : AppCompatActivity() {
             val fragment = when (it.itemId) {
                 R.id.products_list -> productsListFragment
                 R.id.sales_list -> salesListFragment
-                R.id.car_list -> cartFragment
+                R.id.car_list -> cartListFragment
+                R.id.historic_list -> historicListFragment
                 else -> productsListFragment
             }
             supportFragmentManager.commit {

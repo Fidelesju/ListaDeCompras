@@ -24,7 +24,4 @@ interface ProductDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(products: Products)
 
-//    @Query("SELECT * FROM products WHERE title LIKE :searchText OR category LIKE :searchText")
-//    fun getFilteredProducts(searchText: String): List<Products>
-
 }

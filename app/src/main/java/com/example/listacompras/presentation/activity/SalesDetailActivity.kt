@@ -15,6 +15,7 @@ import com.example.listacompras.data.entity.Sales
 import com.example.listacompras.presentation.action.ActionType
 import com.example.listacompras.presentation.action.SalesAction
 import com.example.listacompras.presentation.viewModel.SalesDetailViewModel
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -35,8 +36,8 @@ class SalesDetailActivity : AppCompatActivity() {
         sales = intent.getSerializableExtra(SALES_DETAIL_EXTRA) as? Sales
 
         val tvCount: TextView = findViewById(R.id.tv_count)
-        val btnLess: Button = findViewById(R.id.btn_less)
-        val btnPlus: Button = findViewById(R.id.btn_plus)
+        val btnLess: FloatingActionButton = findViewById(R.id.btn_less)
+        val btnPlus: FloatingActionButton = findViewById(R.id.btn_plus)
         val btnCart: Button = findViewById(R.id.btn_cart)
         val edtObservation: EditText = findViewById(R.id.edt_observation)
         val edtValue: EditText = findViewById(R.id.edt_value)

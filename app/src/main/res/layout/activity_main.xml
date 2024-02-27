@@ -14,11 +14,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="14dp"
-        android:backgroundTint="@color/blue_900"
+        style="@style/flootingActionBar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/baseline_add_24"
-        app:tint="@color/white" />
+         />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container_view_product"
@@ -46,6 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
+            android:backgroundTint="@color/blue_900"
             app:fabCradleMargin="8dp"
             app:fabCradleRoundedCornerRadius="10dp"
             app:fabCradleVerticalOffset="20dp">
