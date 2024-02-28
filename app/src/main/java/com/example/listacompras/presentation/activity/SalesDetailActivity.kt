@@ -4,6 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -30,6 +33,9 @@ class SalesDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sales)
+        setSupportActionBar(findViewById(R.id.toolbar))
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
         sales = intent.getSerializableExtra(SALES_DETAIL_EXTRA) as? Sales
 
         edtCount = findViewById(R.id.edt_count)
@@ -38,6 +44,11 @@ class SalesDetailActivity : AppCompatActivity() {
         val btnCart: Button = findViewById(R.id.btn_cart)
         val edtObservation: EditText = findViewById(R.id.edt_observation)
         val edtValue: EditText = findViewById(R.id.edt_value)
+        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+        val titleProduct = sales?.title
+
+        // Define o título da Toolbar com o valor do produto
+        toolbar.title = titleProduct
 
         // Utilizando elvis operator para definir count como 0 caso seja null
         var count = sales?.count?.toFloat() ?: 0.0f
@@ -92,6 +103,26 @@ class SalesDetailActivity : AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu_sales_detail, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.delete_sales -> {
+                if (sales != null) {
+                    performAction(sales!!, ActionType.DELETE)
+                } else {
+                    println("Deu erro onOptionsItemSelected")
+                }
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
     private fun convertDate(): String {
         val format = SimpleDateFormat("dd/MM/yyyy")
         val date = Date()

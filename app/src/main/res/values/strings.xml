@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Lista de Compras</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fill_fields">Preencha os campos</string>
+    <string name="name_product">Preencha os campos</string>
     <string name="no_products_to_delete">Não há produtos para serem deletados.</string>
     <array name="product_categories">
         <item>Bebidas</item>
@@ -17,6 +17,24 @@
         <item>Mantimento</item>
 
         <!-- Adicione outras categorias aqui conforme necessário -->
+    </array>
+
+    <array name="configuration">
+        <item>Preferências Gerais</item>
+        <!--        Ativar/desativar notificações.-->
+        <!--        Ativar/desativar som.-->
+        <item>Aparência</item>
+        <!--        Tamanho da fonte.-->
+        <item>Idioma</item>
+        <item>Personalização</item>
+        <!--        Ajuste de Filtro-->
+        <item>Ajuda</item>
+    </array>
+
+    <array name="font_sizes">
+        <item>Pequeno</item>
+        <item>Médio</item>
+        <item>Grande</item>
     </array>
 
 </resources>

@@ -13,13 +13,7 @@ class ProductListViewModel(
 ) : ViewModel() {
 
     val productListLiveData: LiveData<List<Products>> = productDao.getAll()
-//    val searchTextLiveData = MutableLiveData<String>()
-//
-//    fun filterProducts() {
-//        val searchText = searchTextLiveData.value.orEmpty()
-//        val filteredList = productDao.getFilteredProducts("%$searchText%")
-//        searchTextLiveData.value = filteredList.toString()
-//    }
+
     companion object {
         fun create(application: Application): ProductListViewModel {
             val databaseInstance = (application as ListaComprasApplication).getAppDatabase()

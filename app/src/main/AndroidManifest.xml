@@ -16,6 +16,21 @@
         android:theme="@style/Theme.ListaCompras"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.activity.PersonalizationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.activity.HelpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.activity.IdiomaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.activity.GeneralPreferencesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.activity.AppearanceActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.activity.HistoricSalesDetailActivity"
             android:exported="false" />
         <activity

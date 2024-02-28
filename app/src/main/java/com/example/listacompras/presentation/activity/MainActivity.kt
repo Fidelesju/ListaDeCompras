@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.example.listacompras.R
 import com.example.listacompras.presentation.fragment.CartFragment
+import com.example.listacompras.presentation.fragment.ConfigurationFragment
 import com.example.listacompras.presentation.fragment.HistoricSalesFragment
 import com.example.listacompras.presentation.fragment.ProductsListFragment
 import com.example.listacompras.presentation.fragment.SalesListFragment
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     private val salesListFragment = SalesListFragment.newInstance()
     private val cartListFragment = CartFragment.newInstance()
     private val historicListFragment = HistoricSalesFragment.newInstance()
+    private val configurationFragment = ConfigurationFragment.newInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +58,7 @@ class MainActivity : AppCompatActivity() {
             R.id.sales_list -> salesListFragment
             R.id.car_list -> cartListFragment
             R.id.historic_list -> historicListFragment
+            R.id.configuration_list -> configurationFragment
             else -> productsListFragment
         }
     }
