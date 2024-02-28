@@ -25,4 +25,9 @@
         android:title="Historico"
         android:icon="@drawable/baseline_auto_awesome_motion_24"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/configuration_list"
+        android:title="Configurações"
+        android:icon="@drawable/baseline_view_compact_24"
+        app:showAsAction="never"/>
 </menu>

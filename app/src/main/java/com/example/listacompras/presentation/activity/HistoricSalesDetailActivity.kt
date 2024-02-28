@@ -9,18 +9,14 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listacompras.R
 import com.example.listacompras.data.entity.HistoricSales
-import com.example.listacompras.data.entity.Products
 import com.example.listacompras.presentation.adapter.HistoricDetailAdapter
 import com.example.listacompras.presentation.viewModel.HistoricSalesDetailViewModel
 
 class HistoricSalesDetailActivity : AppCompatActivity() {
 
     private lateinit var historicSales: HistoricSales
-
     private val viewModel: HistoricSalesDetailViewModel by viewModels {
-        HistoricSalesDetailViewModel.getVMFactory(
-            application
-        )
+        HistoricSalesDetailViewModel.getVMFactory(application)
     }
 
     private val adapter: HistoricDetailAdapter by lazy {
@@ -31,10 +27,9 @@ class HistoricSalesDetailActivity : AppCompatActivity() {
         private const val HISTORIC_DETAIL_EXTRA = "historic.extra.detail"
 
         fun start(context: Context, products: HistoricSales): Intent {
-            val intent = Intent(context, HistoricSalesDetailActivity::class.java).apply {
+            return Intent(context, HistoricSalesDetailActivity::class.java).apply {
                 putExtra(HISTORIC_DETAIL_EXTRA, products)
             }
-            return intent
         }
     }
 
@@ -43,7 +38,8 @@ class HistoricSalesDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_historic_sales_detail)
         val rvHistoricDetail: RecyclerView = findViewById(R.id.rv_historic_detail)
 
-        historicSales = intent.getSerializableExtra(HistoricSalesDetailActivity.HISTORIC_DETAIL_EXTRA) as HistoricSales
+        historicSales =
+            intent.getSerializableExtra(HistoricSalesDetailActivity.HISTORIC_DETAIL_EXTRA) as HistoricSales
 
         listFromDatabase(historicSales)
         setupRecyclerView(rvHistoricDetail)
@@ -55,25 +51,14 @@ class HistoricSalesDetailActivity : AppCompatActivity() {
 
     private fun listFromDatabase(historicSales: HistoricSales) {
         val listObserver = Observer<List<HistoricSales>> { historicList ->
-            historicList?.let {
-                if (it.isNotEmpty()) {
-                    adapter.submitList(it)
-                } else {
-                    println("A lista de históricos está vazia")
-                }
-            } ?: println("A lista de históricos está nula")
+            historicList?.takeIf { it.isNotEmpty() }?.let {
+                adapter.submitList(it)
+            } ?: run {
+                println("A lista de históricos está vazia ou nula")
+            }
         }
 
-
-        // Verifique se o LiveData não é nulo antes de observá-lo
-        if (viewModel.historicSalesDetailLiveData != null) {
-            viewModel.getAllHistoricByDateAndSupermarket(historicSales.dateSales, historicSales.superMarketing)
-
-            viewModel.historicSalesDetailLiveData?.let {
-                it.observe(this, listObserver)
-            } ?: println("LiveData de históricos está nulo")
-        } else {
-            println("LiveData de históricos está nulo")
-        }
+        viewModel.historicSalesDetailLiveData?.observe(this, listObserver)
+        viewModel.getAllHistoricByDateAndSupermarket(historicSales.dateSales, historicSales.superMarketing)
     }
 }

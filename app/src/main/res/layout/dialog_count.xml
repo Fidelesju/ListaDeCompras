@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Quantidade"
-        android:inputType="number" />
+        android:backgroundTint="@color/blue_500"
+        android:inputType="numberDecimal" />
 
 </LinearLayout>

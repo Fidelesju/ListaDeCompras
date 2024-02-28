@@ -2,4 +2,21 @@
     <string name="app_name">Lista de Compras</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fill_fields">Preencha os campos</string>
+    <string name="no_products_to_delete">Não há produtos para serem deletados.</string>
+    <array name="product_categories">
+        <item>Bebidas</item>
+        <item>Carnes</item>
+        <item>Cereais e Lanches</item>
+        <item>Condimentos e Temperos</item>
+        <item>Cuidados Pessoais</item>
+        <item>Frutas e Verduras</item>
+        <item>Laticínios</item>
+        <item>Limpeza</item>
+        <item>Padaria</item>
+        <item>Mantimento</item>
+
+        <!-- Adicione outras categorias aqui conforme necessário -->
+    </array>
+
 </resources>

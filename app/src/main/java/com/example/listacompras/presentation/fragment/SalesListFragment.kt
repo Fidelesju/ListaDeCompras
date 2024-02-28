@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintLayoutStates
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +18,7 @@ import com.example.listacompras.presentation.viewModel.SalesListViewModel
 
 class SalesListFragment : Fragment() {
     private lateinit var ctnContent: LinearLayout
+    private lateinit var ctnTitle: ConstraintLayout
 
     private val adapter: SalesAdapter by lazy {
         SalesAdapter(::openSalesListDetail)
@@ -37,6 +40,7 @@ class SalesListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val rvTaskList: RecyclerView = view.findViewById(R.id.rv_sales)
         ctnContent = view.findViewById(R.id.ctn_content)
+        ctnTitle = view.findViewById(R.id.ctn_title)
 
         listFromDatabase()
         setupRecyclerView(rvTaskList)
@@ -52,8 +56,10 @@ class SalesListFragment : Fragment() {
         val listObserver = Observer<List<Sales>> {
             if (it.isEmpty()) {
                 ctnContent.visibility = View.VISIBLE
+                ctnTitle.visibility = View.GONE
             } else {
                 ctnContent.visibility = View.GONE
+                ctnTitle.visibility = View.VISIBLE
             }
             adapter.submitList(it)
         }

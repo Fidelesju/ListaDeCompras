@@ -16,14 +16,24 @@
             android:id="@+id/edt_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:padding="12dp"
+            android:textColorHint="?attr/colorSecondary"
+            android:background="@drawable/edit_text_background"
+            android:inputType="textCapSentences"
             android:hint="Buscar" />
 
         <androidx.recyclerview.widget.RecyclerView
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:id="@+id/rv_product_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/recycler_view_background"
+            android:padding="8dp"
+            android:layout_margin="8dp"
             tools:listitem="@layout/item_product_list" />
 
     </LinearLayout>
