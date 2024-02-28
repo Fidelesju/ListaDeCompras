@@ -2,48 +2,58 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.ListaCompras" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/blue_700</item>
+        <item name="colorPrimary">@color/blue_900</item>
         <item name="colorPrimaryVariant">@color/blue_900</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/blue_500</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/blue_500</item>
-        <item name="colorSecondaryVariant">@color/blue_900</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/grey_light</item>
+        <item name="colorSecondaryVariant">@color/blue_700</item>
+        <item name="colorOnSecondary">@color/grey_dark</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->s
+        <!-- Customize your theme here. -->
     </style>
 
     <style name="Theme.ListaCompras" parent="Base.Theme.ListaCompras" />
 
     <style name="item_title">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/grey_light</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
         <item name="fontFamily">@font/rubik_semibold</item>
     </style>
 
     <style name="header">
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
         <item name="fontFamily">@font/rubik_semibold</item>
     </style>
 
     <style name="item">
         <item name="fontFamily">@font/rubik_regular</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/blue_300</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="buttonPrimary" parent="Widget.AppCompat.Button">
-        <!--        <item name="fontFamily">@font/rubik_medium</item>-->
+        <item name="fontFamily">@font/rubik_semibold</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="flootingActionBar" parent="ThemeOverlay.Material3.FloatingActionButton.Secondary">
-        <item name="android:backgroundTint">@color/white</item>
-        <item name="android:tint">@color/white</item>
+    <style name="flootingActionBar" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="android:backgroundTint">?attr/colorOnPrimary</item>
     </style>
+
+    <style name="bottomAppBar" parent="Widget.Material3.BottomAppBar">
+        <item name="backgroundTint">?attr/colorPrimary</item>
+    </style>
+
+    <style name="bottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="itemIconTint">@drawable/bottom_navigation_colors</item>
+        <item name="itemTextColor">@drawable/bottom_navigation_colors</item>
+    </style>
+
 </resources>

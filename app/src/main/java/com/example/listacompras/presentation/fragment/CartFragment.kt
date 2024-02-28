@@ -8,10 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -31,7 +32,8 @@ import java.util.Date
 class CartFragment : Fragment() {
 
     private lateinit var tvTotal: TextView
-
+    private lateinit var ctnContent: LinearLayout
+    private lateinit var ctnCart: ConstraintLayout
     private val adapter: CartListAdapter by lazy {
         CartListAdapter(::openSalesListDetail)
     }
@@ -55,7 +57,8 @@ class CartFragment : Fragment() {
         val rvCartList: RecyclerView = view.findViewById(R.id.rv_cart)
         val btnFinishCart: Button = view.findViewById(R.id.btn_finish_cart)
         tvTotal = view.findViewById<TextView>(R.id.tv_total)
-
+        ctnContent = view.findViewById(R.id.ctn_content)
+        ctnCart = view.findViewById(R.id.ctn_cart)
         btnFinishCart.setOnClickListener {
             deleteSales(ActionType.DELETE_ALL)
             showPopupCount(requireContext())
@@ -87,6 +90,13 @@ class CartFragment : Fragment() {
 
         // Observe as alterações em salesByDateLiveData, se necessário
         viewModel.salesByDateLiveData.observe(viewLifecycleOwner, Observer { salesList ->
+            if (salesList.isEmpty()) {
+                ctnContent.visibility = View.VISIBLE
+                ctnCart.visibility = View.GONE
+            } else {
+                ctnContent.visibility = View.GONE
+                ctnCart.visibility = View.VISIBLE
+            }
             adapter.submitList(salesList)
 
             // Zere o total antes de calcular novamente
@@ -158,7 +168,7 @@ class CartFragment : Fragment() {
     }
 
     private fun calculatingValueTotal(valueUnit: String, count: String): Float {
-        return valueUnit.toFloat() * count.toInt()
+        return valueUnit.toFloat() * count.toFloat()
     }
 
     private fun openSalesListDetail(sales: Sales) {

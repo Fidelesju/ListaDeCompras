@@ -61,7 +61,7 @@ class CartListViewHolder(private val view: View) : RecyclerView.ViewHolder(view)
     }
 
     fun calculatingPrice(count: String, value: String): Float {
-        val countInt = count.toInt()
+        val countInt = count.toFloat()
         val valueInt = value.toFloat()
         val total = countInt * valueInt
 

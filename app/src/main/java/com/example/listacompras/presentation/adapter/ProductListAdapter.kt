@@ -91,7 +91,7 @@ class ProductListViewHolder(private val view: View) : RecyclerView.ViewHolder(vi
         val context = itemView.context
 
         fab.setOnClickListener {
-            val pressed = ContextCompat.getColor(context, R.color.green)
+            val pressed = ContextCompat.getColor(context, R.color.green_light)
             val unpressed = ContextCompat.getColor(context, R.color.white)
 
 
@@ -124,7 +124,7 @@ class ProductListViewHolder(private val view: View) : RecyclerView.ViewHolder(vi
         val editTextQuantidade = dialogView.findViewById<EditText>(R.id.editTextQuantidade)
 
         builder.setView(dialogView)
-            .setTitle("Digite a quantidade para ${products.title}")
+            .setTitle("Digite a quantidade para ${products.title}.")
             .setPositiveButton("OK") { dialog, _ ->
                 val count = editTextQuantidade.text.toString()
                 val value = 0

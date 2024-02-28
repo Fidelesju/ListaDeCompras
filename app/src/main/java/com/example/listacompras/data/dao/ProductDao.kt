@@ -15,7 +15,7 @@ interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(products: Products)
 
-    @Query("Select * from products")
+    @Query("Select * from products  ORDER BY title ASC")
     fun getAll(): LiveData<List<Products>>
 
     @Delete

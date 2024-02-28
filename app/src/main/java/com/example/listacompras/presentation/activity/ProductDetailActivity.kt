@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -17,12 +16,16 @@ import com.example.listacompras.data.entity.Products
 import com.example.listacompras.presentation.action.ActionType
 import com.example.listacompras.presentation.action.ProductAction
 import com.example.listacompras.presentation.viewModel.ProductDetailViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 
 class ProductDetailActivity : AppCompatActivity() {
 
     private var products: Products? = null
+
+    //region teste
+    private val PREFS_NAME = "YourPrefsFile"
+    private val KEY_FIRST_RUN = "firstRun"
+    //endregion
 
     private val viewModel: ProductDetailViewModel by viewModels {
         ProductDetailViewModel.getVMFactory(
@@ -36,11 +39,11 @@ class ProductDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         //region variables
-        val floatingActionButton = findViewById<FloatingActionButton>(R.id.floating_action_button)
         val btnApply: Button = findViewById(R.id.btn_apply)
         val btnDelete: Button = findViewById(R.id.btn_delete)
         val edtProduct: EditText = findViewById(R.id.edt_product)
         val spnCategory: Spinner = findViewById(R.id.spn_category)
+
         val category = listOf("Bebidas","Carnes","Cereais e Lanches","Condimentos e Temperos","Cuidados Pessoais","Frutas e Verduras", "Laticínios","Limpeza", "Padaria","Mantimento")
 
         //endregion
@@ -54,9 +57,6 @@ class ProductDetailActivity : AppCompatActivity() {
         //endregion
 
         //region events
-        floatingActionButton.setOnClickListener {
-            openMainActivity()
-        }
 
         btnApply.setOnClickListener {
             val title = edtProduct.text.toString()
@@ -69,22 +69,44 @@ class ProductDetailActivity : AppCompatActivity() {
                     addOrUpdateTask(products!!.id, title, category, ActionType.UPDATE)
                 }
             } else {
-                showMessage(it, "Preencha os campos")
-                println("Deu erro setOnClickListener")
+                showMessage(it, getString(R.string.fill_fields))
             }
+
+            if (isFirstRun()) {
+                val exampleProducts = generateExampleProductList()
+
+                for (product in exampleProducts) {
+                    addOrUpdateTask(product.id, product.title, product.category, ActionType.CREATE)
+                }
+
+                setFirstRunFlag()
+            }
+
         }
 
         btnDelete.setOnClickListener {
             if (products != null) {
                 performAction(products!!, ActionType.DELETE)
             } else {
-                showMessage(it, "Não há produtos para serem excluidos")
-                Log.d("ERRO", " btnDelete.setOnClickListener ")
+                showMessage(it, getString(R.string.no_products_to_delete))
             }
         }
         setTextSetOnClickListener(products, edtProduct, spnCategory, adaptador)
 
         //endregion
+
+    }
+
+    private fun isFirstRun(): Boolean {
+        val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        return prefs.getBoolean(KEY_FIRST_RUN, true)
+    }
+
+    private fun setFirstRunFlag() {
+        val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val editor = prefs.edit()
+        editor.putBoolean(KEY_FIRST_RUN, false)
+        editor.apply()
     }
 
     private fun setTextSetOnClickListener(
@@ -100,16 +122,50 @@ class ProductDetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun generateExampleProductList(): List<Products> {
+        val exampleProducts = listOf(
+            Products(title = "Coca-Cola", category = "Bebidas"),
+            Products(title = "Frango", category = "Carnes"),
+            Products(title = "Cereal Matinal", category = "Cereais e Lanches"),
+            Products(title = "Sal", category = "Condimentos e Temperos"),
+            Products(title = "Shampoo", category = "Cuidados Pessoais"),
+            Products(title = "Maçã", category = "Frutas e Verduras"),
+            Products(title = "Leite", category = "Laticínios"),
+            Products(title = "Detergente", category = "Limpeza"),
+            Products(title = "Pão", category = "Padaria"),
+            Products(title = "Arroz", category = "Mantimento"),
+            Products(title = "Refrigerante", category = "Bebidas"),
+            Products(title = "Carne de Porco", category = "Carnes"),
+            Products(title = "Granola", category = "Cereais e Lanches"),
+            Products(title = "Azeite", category = "Condimentos e Temperos"),
+            Products(title = "Sabonete", category = "Cuidados Pessoais"),
+            Products(title = "Banana", category = "Frutas e Verduras"),
+            Products(title = "Queijo", category = "Laticínios"),
+            Products(title = "Limpador Multiuso", category = "Limpeza"),
+            Products(title = "Baguete", category = "Padaria"),
+            Products(title = "Feijão", category = "Mantimento"),
+            Products(title = "Água Mineral", category = "Bebidas"),
+            Products(title = "Carne de Boi", category = "Carnes"),
+            Products(title = "Barra de Cereal", category = "Cereais e Lanches"),
+            Products(title = "Vinagre", category = "Condimentos e Temperos"),
+            Products(title = "Creme Dental", category = "Cuidados Pessoais"),
+            Products(title = "Uva", category = "Frutas e Verduras"),
+            Products(title = "Iogurte", category = "Laticínios"),
+            Products(title = "Desinfetante", category = "Limpeza"),
+            Products(title = "Rosquinha", category = "Padaria"),
+            Products(title = "Macarrão", category = "Mantimento"),
+            // Adicione mais produtos conforme necessário
+        )
+
+
+        return exampleProducts
+    }
+
     private fun addOrUpdateTask(
         id: Int, title: String, category: String, actionType: ActionType
     ) {
         val products = Products(id, title, category)
         performAction(products, actionType)
-    }
-
-    private fun openMainActivity() {
-        val intent = MainActivity.start(this)
-        startActivity(intent)
     }
 
     companion object {

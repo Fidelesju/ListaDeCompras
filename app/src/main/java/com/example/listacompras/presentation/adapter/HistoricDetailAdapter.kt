@@ -43,7 +43,6 @@ class HistoricDetailViewHolder(private val view: View) : RecyclerView.ViewHolder
 
     private val tvProduct = view.findViewById<TextView>(R.id.tv_product_historic)
     private val tvDate = view.findViewById<TextView>(R.id.tv_date_product)
-    private val tvTotal = view.findViewById<TextView>(R.id.tv_total_product)
     private val tvValueProduct = view.findViewById<TextView>(R.id.tv_value_product)
     private val tvCountProduct = view.findViewById<TextView>(R.id.tv_count_product)
 
@@ -54,7 +53,6 @@ class HistoricDetailViewHolder(private val view: View) : RecyclerView.ViewHolder
 
         tvProduct.text = historicSales.title
         tvDate.text = historicSales.dateSales
-        tvTotal.text = historicSales.totalSales
         tvValueProduct.text = historicSales.value
         tvCountProduct.text = historicSales.count
 
@@ -62,6 +60,4 @@ class HistoricDetailViewHolder(private val view: View) : RecyclerView.ViewHolder
             listFromDatabase.invoke(historicSales)
         }
     }
-
-
 }

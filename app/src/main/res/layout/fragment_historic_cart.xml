@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/activity_historic.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,15 +9,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="8dp">
 
         <TextView
             style="@style/item_title"
             android:layout_width="0dp"
-
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
             android:layout_weight="1"
             android:text="Compras"
             android:textAlignment="center" />
@@ -26,22 +24,16 @@
             style="@style/item_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
             android:layout_weight="1"
             android:text="Data"
-
             android:textAlignment="center" />
 
         <TextView
             style="@style/item_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
             android:layout_weight="1"
             android:text="Total"
-
             android:textAlignment="center" />
 
     </LinearLayout>
@@ -51,6 +43,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/recycler_view_background"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_historic_list" />
 </LinearLayout>
