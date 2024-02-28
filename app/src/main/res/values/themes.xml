@@ -56,4 +56,26 @@
         <item name="itemTextColor">@drawable/bottom_navigation_colors</item>
     </style>
 
+    <style name="toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="titleTextColor">@color/grey_light</item>
+        <item name="fontFamily">@font/rubik_semibold</item>
+    </style>
+
+    <style name="font_size" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Outras configurações aqui -->
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.SmallFont">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.MediumFont">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.LargeFont">
+        <item name="android:textSize">22sp</item>
+    </style>
+
 </resources>

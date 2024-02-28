@@ -34,6 +34,7 @@ class CartFragment : Fragment() {
     private lateinit var tvTotal: TextView
     private lateinit var ctnContent: LinearLayout
     private lateinit var ctnCart: ConstraintLayout
+
     private val adapter: CartListAdapter by lazy {
         CartListAdapter(::openSalesListDetail)
     }
@@ -67,11 +68,6 @@ class CartFragment : Fragment() {
         listFromDatabase()
         setupRecyclerView(rvCartList)
     }
-
-    override fun onStart() {
-        super.onStart()
-    }
-
 
     private fun deleteSales(actionType: ActionType) {
         val salesAction = SalesAction(null, actionType.name)

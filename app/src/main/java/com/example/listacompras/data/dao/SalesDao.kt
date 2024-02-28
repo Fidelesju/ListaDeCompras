@@ -2,6 +2,7 @@ package com.example.listacompras.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -25,4 +26,7 @@ interface SalesDao {
 
     @Query ("Delete from sales")
     fun deleteAll()
+
+    @Delete
+    fun delete(sales: Sales)
 }
