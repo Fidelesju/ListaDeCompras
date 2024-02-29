@@ -26,11 +26,16 @@ import com.example.listacompras.presentation.activity.SalesDetailActivity
 import com.example.listacompras.presentation.adapter.CartListAdapter
 import com.example.listacompras.presentation.viewModel.HistoricSalesDetailViewModel
 import com.example.listacompras.presentation.viewModel.SalesListViewModel
+import java.math.BigDecimal
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 import java.text.SimpleDateFormat
 import java.util.Date
 
 class CartFragment : Fragment() {
 
+    private var valueFinal = 0f
+    private var totalFormated = ""
     private lateinit var tvTotal: TextView
     private lateinit var ctnContent: LinearLayout
     private lateinit var ctnCart: ConstraintLayout
@@ -65,8 +70,12 @@ class CartFragment : Fragment() {
             showPopupCount(requireContext())
         }
 
-        listFromDatabase()
         setupRecyclerView(rvCartList)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        listFromDatabase()
     }
 
     private fun deleteSales(actionType: ActionType) {
@@ -100,15 +109,15 @@ class CartFragment : Fragment() {
 
             // Imprima as vendas no Logcat
             for (sale in salesList) {
-                val valueFinal = calculatingValueTotal(sale.value, sale.count)
+                valueFinal = calculatingValueTotal(sale.value, sale.count)
+
                 total += valueFinal
+                totalFormated = formatarNumero(total)
 
             }
 
             // Atualize o TextView fora do loop
-            tvTotal.text = total.toString()
-
-
+            tvTotal.text = totalFormated
         })
     }
 
@@ -130,8 +139,10 @@ class CartFragment : Fragment() {
 
             // Imprima as vendas no Logcat
             for (sale in salesList) {
-                val valueFinal = calculatingValueTotal(sale.value, sale.count)
+                valueFinal = calculatingValueTotal(sale.value, sale.count)
+
                 total += valueFinal
+                totalFormated = formatarNumero(total)
 
                 // Crie o objeto HistoricSales, mas não execute a ação aqui
                 val historicSales = HistoricSales(
@@ -141,7 +152,7 @@ class CartFragment : Fragment() {
                     sale.observation,
                     sale.value,
                     sale.dateSales,
-                    total.toString(),
+                    totalFormated,
                     supermarketing
                 )
 
@@ -150,7 +161,7 @@ class CartFragment : Fragment() {
             }
 
             // Atualize o TextView fora do loop
-            tvTotal.text = total.toString()
+            tvTotal.text = totalFormated
 
             // Agora, execute a ação para criar todos os históricos
             historicList.forEach { historicSales ->
@@ -162,6 +173,27 @@ class CartFragment : Fragment() {
             }
         })
     }
+
+
+    fun formatarNumero(numero: Float): String {
+        val formato = DecimalFormat("#,##0.00")
+        val symbols = DecimalFormatSymbols()
+        symbols.decimalSeparator = ','
+        symbols.groupingSeparator = '.'
+        formato.decimalFormatSymbols = symbols
+
+        // Convertendo o número float para BigDecimal para obter precisão
+        val numeroBigDecimal = BigDecimal(numero.toDouble())
+
+        return formato.format(numeroBigDecimal)
+    }
+
+    fun main() {
+        val numeroFloat = 1234567.89f
+        val numeroFormatado = formatarNumero(numeroFloat)
+        println(numeroFormatado)
+    }
+
 
     private fun calculatingValueTotal(valueUnit: String, count: String): Float {
         return valueUnit.toFloat() * count.toFloat()

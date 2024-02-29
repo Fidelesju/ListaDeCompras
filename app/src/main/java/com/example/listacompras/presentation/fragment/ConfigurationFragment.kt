@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.listacompras.R
 import com.example.listacompras.data.entity.ConfigurationItem
 import com.example.listacompras.presentation.activity.AppearanceActivity
-import com.example.listacompras.presentation.activity.GeneralPreferencesActivity
 import com.example.listacompras.presentation.activity.HelpActivity
 import com.example.listacompras.presentation.activity.IdiomaActivity
 import com.example.listacompras.presentation.activity.PersonalizationActivity
@@ -52,11 +51,6 @@ class ConfigurationFragment : Fragment() {
 
     private fun openActivity(configurationItem: ConfigurationItem) {
         when (configurationItem.title) {
-            "Preferências Gerais" -> {
-                val intent = Intent(requireContext(), GeneralPreferencesActivity::class.java)
-                startActivity(intent)
-            }
-
             "Aparência" -> {
                 val intent = Intent(requireContext(), AppearanceActivity::class.java)
                 startActivity(intent)

@@ -19,6 +19,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/tv_portugues"
                 style="@style/item_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -48,6 +49,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/tv_ingles"
                 style="@style/item_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

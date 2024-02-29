@@ -1,0 +1,77 @@
+<resources>
+
+    <string name="app_name_en">Shopping List</string>
+    <string name="welcome_en">Welcome to Shopping List</string>
+    <string name="fill_fields_en">Fill in the fields</string>
+    <string name="name_product_en">Products</string>
+    <string name="name_sales_en">Purchases</string>
+    <string name="name_cart_en">Shopping Cart</string>
+    <string name="name_historic_en">History</string>
+    <string name="no_products_to_delete_en">There are no products to be deleted.</string>
+    <string name="font_size_title_en">Font Size</string>
+    <string name="no_implemented_en">NOT YET IMPLEMENTED</string>
+    <string name="what_is_listadecompras_en">1. What is Shopping List?</string>
+    <string name="how_to_use_listadecompras_en">2. How to Use Shopping List</string>
+    <string name="ingles_idioma_en">English</string>
+    <string name="portugues_idioma_en">Portuguese</string>
+
+    <!--    Shopping list help screen-->
+    <string name="product_item_1.1_en">1.1 Listing of all registered products.</string>
+    <string name="product_item_1.2_en">1.2 Addition of new products using the "+" button.</string>
+    <string name="product_item_1.3_en">1.3 Use of a field to search for products by title or category.</string>
+    <string name="product_item_1.4_en">1.4 Selection of desired products by clicking the check button associated with each product.</string>
+    <string name="product_item_1.5_en">1.5 Request for the desired quantity after selection. (Example: 2.4 for grams or kilograms)</string>
+
+    <!--    Shopping screen help-->
+    <string name="sales_item_1.1_en">2.1 Listing of products to be purchased.</string>
+    <string name="sales_item_1.2_en">2.2 Addition of information such as market value and brand (optional) when selecting a product.</string>
+    <string name="sales_item_1.3_en">2.3 Addition of the product to the cart after configuration.</string>
+
+    <!--    Shopping cart screen help-->
+    <string name="cart_item_1.1_en">3.1 Listing of products being purchased.</string>
+    <string name="cart_item_1.2_en">3.2 Calculation of the individual value of each product.</string>
+    <string name="cart_item_1.3_en">3.3 Calculation of the total value of the purchase.</string>
+    <string name="cart_item_1.4_en">3.4 Editing product information through interaction.</string>
+    <string name="cart_item_1.5_en">3.5 Confirmation of the purchase with the choice of the supermarket.</string>
+
+    <!--    History screen help-->
+    <string name="historic_item_1.1_en">5.1 Display of the complete history of purchases.</string>
+    <string name="historic_item_1.2_en">5.2 Detailed details when selecting a specific purchase.</string>
+
+    <string name="description_app_en">The Shopping List app is a practical tool to organize your purchases. With intuitive features, it facilitates the creation and management of product lists, helping you keep track of your shopping needs. Customize your lists, add items easily, and enjoy a streamlined experience to make your shopping more efficient. Simplify your shopping routine with the Shopping List app!</string>
+    <array name="product_categories_en">
+        <item>Beverages</item>
+        <item>Meats</item>
+        <item>Cereals and Snacks</item>
+        <item>Condiments and Spices</item>
+        <item>Personal Care</item>
+        <item>Fruits and Vegetables</item>
+        <item>Dairy</item>
+        <item>Cleaning</item>
+        <item>Bakery</item>
+        <item>Grocery</item>
+
+        <!-- Add other categories here as needed -->
+    </array>
+
+    <array name="configuration_en">
+        <item>Appearance</item>
+        <!-- Font size.-->
+        <item>Language</item>
+        <item>Customization</item>
+        <!-- Filter Adjustment-->
+        <item>Help</item>
+    </array>
+
+    <array name="font_sizes_en">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </array>
+
+    <array name="filter_cart_en">
+        <item>Category</item>
+        <item>Alphabetical Order</item>
+    </array>
+
+</resources>

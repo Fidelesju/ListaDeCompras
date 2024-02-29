@@ -24,4 +24,8 @@ interface ProductDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(products: Products)
 
+    @Query("SELECT * FROM products WHERE title LIKE '%' || :searchText || '%' OR category LIKE '%' || :searchText || '%' ORDER BY title ASC")
+    fun searchProducts(searchText: String): List<Products>
+
+
 }

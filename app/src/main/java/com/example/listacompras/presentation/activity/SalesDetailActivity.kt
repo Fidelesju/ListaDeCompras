@@ -17,15 +17,17 @@ import com.example.listacompras.data.entity.Sales
 import com.example.listacompras.presentation.action.ActionType
 import com.example.listacompras.presentation.action.SalesAction
 import com.example.listacompras.presentation.viewModel.SalesDetailViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 
 class SalesDetailActivity : AppCompatActivity() {
 
     private var sales: Sales? = null
-    lateinit var edtCount : EditText
+    private val decimalFormat = DecimalFormat("#,###")
+    lateinit var edtCount: EditText
+    lateinit var edtValue: EditText
     private val viewModel: SalesDetailViewModel by viewModels {
         SalesDetailViewModel.getVMFactory(application)
     }
@@ -39,11 +41,10 @@ class SalesDetailActivity : AppCompatActivity() {
         sales = intent.getSerializableExtra(SALES_DETAIL_EXTRA) as? Sales
 
         edtCount = findViewById(R.id.edt_count)
-        val btnLess: FloatingActionButton = findViewById(R.id.btn_less)
-        val btnPlus: FloatingActionButton = findViewById(R.id.btn_plus)
+        edtValue = findViewById(R.id.edt_value)
+
         val btnCart: Button = findViewById(R.id.btn_cart)
         val edtObservation: EditText = findViewById(R.id.edt_observation)
-        val edtValue: EditText = findViewById(R.id.edt_value)
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
         val titleProduct = sales?.title
 
@@ -55,20 +56,7 @@ class SalesDetailActivity : AppCompatActivity() {
 
         // Utilizando setText para definir o texto diretamente
         edtCount.setText(count.toString())
-
-        btnPlus.setOnClickListener {
-            // Incrementa count
-            count += 1
-            edtCount.setText(count.toString())
-        }
-
-        btnLess.setOnClickListener {
-            // Decrementa count, evitando valores negativos
-            if (count > 0) {
-                count -= 1
-                edtCount.setText(count.toString())
-            }
-        }
+        edtValue.setText(sales?.value)
 
         btnCart.setOnClickListener {
             val value = edtValue.text.toString()
@@ -79,18 +67,35 @@ class SalesDetailActivity : AppCompatActivity() {
             val countEdit = edtCount.text
 
             if (value.isNotEmpty()) {
-                if (count.toString() == countEdit.toString())
-                {
-                    updateSales(id, title, count.toString(), value, observation, today, ActionType.UPDATE)
-                }
-                else
-                {
-                    updateSales(id, title, countEdit.toString(), value, observation, today, ActionType.UPDATE)
+                if (count.toString() == countEdit.toString()) {
+                    updateSales(
+                        id,
+                        title,
+                        count.toString(),
+                        value,
+                        observation,
+                        today,
+                        ActionType.UPDATE
+                    )
+                } else {
+                    updateSales(
+                        id,
+                        title,
+                        countEdit.toString(),
+                        value,
+                        observation,
+                        today,
+                        ActionType.UPDATE
+                    )
                 }
             } else {
                 showMessage(it, getString(R.string.fill_fields))
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
     }
 
     companion object {
@@ -123,6 +128,7 @@ class SalesDetailActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
     private fun convertDate(): String {
         val format = SimpleDateFormat("dd/MM/yyyy")
         val date = Date()

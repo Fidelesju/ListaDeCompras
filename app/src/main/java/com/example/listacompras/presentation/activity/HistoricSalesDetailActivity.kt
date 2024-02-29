@@ -50,6 +50,13 @@ class HistoricSalesDetailActivity : AppCompatActivity() {
     }
 
     private fun listFromDatabase(historicSales: HistoricSales) {
+        // Chama o método para obter a lista no ViewModel
+        viewModel.getAllHistoricByDateAndSupermarket(
+            historicSales.dateSales,
+            historicSales.superMarketing
+        )
+
+        // Observador para a lista de históricos
         val listObserver = Observer<List<HistoricSales>> { historicList ->
             historicList?.takeIf { it.isNotEmpty() }?.let {
                 adapter.submitList(it)
@@ -58,7 +65,8 @@ class HistoricSalesDetailActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.historicSalesDetailLiveData?.observe(this, listObserver)
-        viewModel.getAllHistoricByDateAndSupermarket(historicSales.dateSales, historicSales.superMarketing)
+        // Adiciona o observador após chamar o método no ViewModel
+        viewModel.historicSalesDetailLiveData.observe(this, listObserver)
     }
+
 }

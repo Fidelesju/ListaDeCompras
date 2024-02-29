@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listacompras.R
 import com.example.listacompras.data.entity.Sales
+import java.math.BigDecimal
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 
 class CartListAdapter(
     private val openSalesListDetail: (sales: Sales) -> Unit,
@@ -53,7 +56,7 @@ class CartListViewHolder(private val view: View) : RecyclerView.ViewHolder(view)
         val totalProduct = calculatingPrice(sales.count, sales.value)
 
         tvTitleSalesCart.text = sales.title
-        tvTotalSales.text = totalProduct.toString()
+        tvTotalSales.text = formatarNumero(totalProduct)
 
         view.setOnClickListener {
             openSalesListDetail.invoke(sales)
@@ -66,5 +69,18 @@ class CartListViewHolder(private val view: View) : RecyclerView.ViewHolder(view)
         val total = countInt * valueInt
 
         return total
+    }
+
+    fun formatarNumero(numero: Float): String {
+        val formato = DecimalFormat("#,##0.00")
+        val symbols = DecimalFormatSymbols()
+        symbols.decimalSeparator = ','
+        symbols.groupingSeparator = '.'
+        formato.decimalFormatSymbols = symbols
+
+        // Convertendo o número float para BigDecimal para obter precisão
+        val numeroBigDecimal = BigDecimal(numero.toDouble())
+
+        return formato.format(numeroBigDecimal)
     }
 }

@@ -1,9 +1,45 @@
 <resources>
+
     <string name="app_name">Lista de Compras</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome">Bem-vindo ao Lista de Compras</string>
     <string name="fill_fields">Preencha os campos</string>
-    <string name="name_product">Preencha os campos</string>
+    <string name="name_product">Produtos</string>
+    <string name="name_sales">Compras</string>
+    <string name="name_cart">Carrinho de Compras</string>
+    <string name="name_historic">Historico</string>
     <string name="no_products_to_delete">Não há produtos para serem deletados.</string>
+    <string name="font_size_title">Tamanho da Fonte</string>
+    <string name="no_implemented">AINDA NÃO IMPLEMENTADO</string>
+    <string name="what_is_listadecompras">1. O que é Lista de Compras?</string>
+    <string name="how_to_use_listadecompras">2. Como Usar o Lista de Compras</string>
+    <string name="ingles_idioma">Inglês</string>
+    <string name="portugues_idioma">Português</string>
+
+    <!--    Lista de produtos tela de ajuda-->
+    <string name="product_item_1.1">1.1 Listagem de todos os produtos cadastrados.</string>
+    <string name="product_item_1.2">1.2 Adição de novos produtos no botão "+"</string>
+    <string name="product_item_1.3">1.3 Utilização de um campo para buscar produtos por título ou categoria.</string>
+    <string name="product_item_1.4">1.4 Seleção de produtos desejados ao clicar no botão check associado a cada produto.</string>
+    <string name="product_item_1.5">1.5 Solicitação da quantidade desejada após a seleção. (Exemplo: 2.4 para gramas ou quilos)</string>
+
+    <!--    Lista de compras tela de ajuda-->
+    <string name="sales_item_1.1">2.1 Listagem dos produtos a serem comprados.</string>
+    <string name="sales_item_1.2">2.2 Adição de informações como valor de mercado e marca (opcional) ao selecionar um produto.</string>
+    <string name="sales_item_1.3">2.3 Adição do produto ao carrinho após a configuração.</string>
+
+    <!--    Lista de carrinho de compras tela de ajuda-->
+    <string name="cart_item_1.1">3.1 Listagem dos produtos sendo comprados.</string>
+    <string name="cart_item_1.2">3.2 Cálculo do valor individual de cada produto.</string>
+    <string name="cart_item_1.3">3.3 Cálculo do valor total da compra.</string>
+    <string name="cart_item_1.4">3.4 Edição das informações do produto através de interação.</string>
+    <string name="cart_item_1.5">3.5 Confirmação da compra com a escolha do supermercado.</string>
+
+    <!--    Lista de historico tela de ajuda-->
+    <string name="historic_item_1.1">5.1 Exibição do histórico completo de compras.</string>
+    <string name="historic_item_1.2">5.2 Detalhes detalhados ao selecionar uma compra específica.</string>
+
+
+    <string name="description_app">O aplicativo Lista de Compras é uma ferramenta prática para organizar suas compras. Com recursos intuitivos, ele facilita a criação e gestão de listas de produtos, ajudando você a manter o controle das suas necessidades de compra. Personalize suas listas, adicione itens facilmente e desfrute de uma experiência simplificada para tornar suas compras mais eficientes. Simplifique sua rotina de compras com o aplicativo Lista de Compras!</string>
     <array name="product_categories">
         <item>Bebidas</item>
         <item>Carnes</item>
@@ -20,9 +56,6 @@
     </array>
 
     <array name="configuration">
-        <item>Preferências Gerais</item>
-        <!--        Ativar/desativar notificações.-->
-        <!--        Ativar/desativar som.-->
         <item>Aparência</item>
         <!--        Tamanho da fonte.-->
         <item>Idioma</item>
@@ -35,6 +68,11 @@
         <item>Pequeno</item>
         <item>Médio</item>
         <item>Grande</item>
+    </array>
+
+    <array name="filter_cart">
+        <item>Categoria</item>
+        <item>Ordem Alfabetica</item>
     </array>
 
 </resources>
